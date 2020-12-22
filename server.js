@@ -23,14 +23,14 @@ app.use(express.static(path.join(__dirname, '/public/')));
 
 // Routes
 // =============================================================
-const authRouter = require('./routes/auth-routes')
+// const authRouter = require('./routes/auth-routes')
 const indexRouter = require('./routes/index-routes')
-const articleRouter = require('./routes/article-routes')
-const adminRouter = require('./routes/admin-routes')
+// const articleRouter = require('./routes/article-routes')
+// const adminRouter = require('./routes/admin-routes')
 
-app.use('/auth', authRouter);
-app.use('/admin', adminRouter);
-app.use('/articles', articleRouter);
+// app.use('/auth', authRouter);
+// app.use('/admin', adminRouter);
+// app.use('/articles', articleRouter);
 app.use('/', indexRouter);
 
 // Addn'l Middleware (something that is executed when everything comes in...)
