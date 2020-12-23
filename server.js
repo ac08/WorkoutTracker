@@ -19,7 +19,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Sets up the Express app to establish a static directory to access static files
-app.use(express.static(path.join(__dirname, '/public/')));
+// app.use(express.static(path.join(__dirname, '/public/')));
+app.use(express.static("public"));
 
 // Routes
 // =============================================================
