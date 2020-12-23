@@ -13,15 +13,14 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 
 // Sets up Morgan tool
-app.use(morgan('tiny'));
+app.use(morgan('dev'));
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Sets up the Express app to establish a static directory to access static files
-// app.use(express.static(path.join(__dirname, '/public/')));
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '/public/')));
 
 // Sets up the MongoDB / Mongoose connection
 mongoose.connect(
@@ -37,19 +36,18 @@ mongoose.connect(
 // Routes
 // =============================================================
 const workoutRouter = require('./routes/api-routes');
-app.use('/api/workouts', workoutRouter);
-
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname + "/public/index.html"));
-});
+app.use('/api/workouts', workoutRouter());
 
 app.get("/exercise", (req, res) => {
-  res.sendFile(path.join(__dirname + "/public/exercise.html"));
+  res.sendFile(path.join(__dirname + "/views/exercise.html"));
 });
 
 app.get("/stats", (req, res) => {
-  res.sendFile(path.join(__dirname + "/public/stats.html"));
+  res.sendFile(path.join(__dirname + "/views/stats.html"));
+});
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname + '/views/index.html'));
 });
 
 
