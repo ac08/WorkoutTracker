@@ -23,15 +23,24 @@ app.use(express.json());
 // app.use(express.static(path.join(__dirname, '/public/')));
 app.use(express.static('public'));
 
+// Sets up the MongoDB / Mongoose connection
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost/workout',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  }
+);
+
 // Routes
 // =============================================================
-// const indexRouter = require('./routes/index-routes');
-// const exerciseRouter = require('./routes/exercise-routes')
-// const statsRouter = require('./routes/stats-routes')
 
-// app.use('/', indexRouter);
-// app.use('/exercise', exerciseRouter);
-// app.use('/stats', statsRouter);
+const workoutRouter = require('./routes/api-routes')(app);
+
+app.use('/api/workouts', workoutRouter);
+
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname + "/public/index.html"));
