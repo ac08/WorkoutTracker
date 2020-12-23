@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "DEBUG=app,app:* nodemon server.js",
-    "start-WIN": "set DEBUG=app & nodemon server.js",
+    "start": "node server.js",
+    "watch": "nodemon server.js",
     "seed": "node seeders/seed.js"
   },
   "author": "Andrew Circelli",
