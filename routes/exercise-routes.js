@@ -2,17 +2,17 @@ const express = require('express');
 const path = require("path");
 
 
-const indexRouter = express.Router();
+const exerciseRouter = express.Router();
 
 // Routes
 // =============================================================
 function router() {
-  indexRouter.route('/')
+  exerciseRouter.route('/')
     .get((req, res) => {
-      console.log('rendering index page...');
-      res.sendFile(path.join(__dirname + "/index.html"));
+      console.log('rendering exercise page...');
+      res.sendFile(path.join(__dirname + "/exercise.html"));
     });
-  return indexRouter;
+  return exerciseRouter;
 }
 
 module.exports = router;

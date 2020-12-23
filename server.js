@@ -2,9 +2,10 @@
 // =============================================================
 const express = require('express');
 const chalk = require('chalk');
-const debug = require('debug')('app');
 const morgan = require('morgan');
+const mongoose = require("mongoose");
 const path = require('path');
+
 
 // Sets up the Express App
 // =============================================================
@@ -15,24 +16,36 @@ const app = express();
 app.use(morgan('tiny'));
 
 // Sets up the Express app to handle data parsing
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Sets up the Express app to establish a static directory to access static files
 // app.use(express.static(path.join(__dirname, '/public/')));
-app.use(express.static("public"));
+app.use(express.static('public'));
 
 // Routes
 // =============================================================
-// const authRouter = require('./routes/auth-routes')
-const indexRouter = require('./routes/index-routes')
-// const articleRouter = require('./routes/article-routes')
-// const adminRouter = require('./routes/admin-routes')
+// const indexRouter = require('./routes/index-routes');
+// const exerciseRouter = require('./routes/exercise-routes')
+// const statsRouter = require('./routes/stats-routes')
 
-// app.use('/auth', authRouter);
-// app.use('/admin', adminRouter);
-// app.use('/articles', articleRouter);
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
+// app.use('/exercise', exerciseRouter);
+// app.use('/stats', statsRouter);
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname + "/public/index.html"));
+});
+
+app.get("/exercise", (req, res) => {
+  res.sendFile(path.join(__dirname + "/public/exercise.html"));
+});
+
+app.get("/stats", (req, res) => {
+  res.sendFile(path.join(__dirname + "/public/stats.html"));
+});
+
+
 
 // Addn'l Middleware (something that is executed when everything comes in...)
 // =============================================================
@@ -55,5 +68,5 @@ app.use((err, req, res, next) => {
 // Starting our Express app
 // =============================================================
 app.listen(PORT, () => {
-  debug(`listening on PORT ${chalk.green(PORT)}`);
+  console.log(`listening on PORT ${chalk.green(PORT)}`);
 });

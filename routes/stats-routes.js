@@ -2,17 +2,17 @@ const express = require('express');
 const path = require("path");
 
 
-const indexRouter = express.Router();
+const statsRouter = express.Router();
 
 // Routes
 // =============================================================
 function router() {
-  indexRouter.route('/')
+  statsRouter.route('/')
     .get((req, res) => {
-      console.log('rendering index page...');
-      res.sendFile(path.join(__dirname + "/index.html"));
+      console.log('rendering stats page...');
+      res.sendFile(path.join(__dirname + "/stats.html"));
     });
-  return indexRouter;
+  return statsRouter;
 }
 
 module.exports = router;
