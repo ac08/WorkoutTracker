@@ -15,13 +15,6 @@ function router() {
         res.json(err);
       }
     }());
-    // if (databaseCheck.length === 0) {
-    //   console.log('The database is NULL. Database will be seeded.');
-    //   require('../seeders/seed');
-    //   next();
-    // } else {
-    //   next();
-    // }
   })
   .get((req, res) => {
     (async function findAllWorkouts() {
@@ -35,11 +28,9 @@ function router() {
   })
   // Add Workout
   .post((req, res) => {
-    console.log('test1')
     const newWorkout = req.body;
     (async function createNewWorkout() {
       try {
-        console.log('test2');
         const dbWorkout = await db.Workout.create(newWorkout);
         console.log(dbWorkout);
         res.json(dbWorkout)
@@ -52,7 +43,6 @@ function router() {
   workoutRouter.route('/:id')
   .put((req, res) => {
     const dbWorkoutId = req.params.id;
-    console.log(dbWorkoutId);
     (async function addExercise() {
       try {
         const dbWorkout = await db.Workout.findOneAndUpdate(
@@ -70,9 +60,15 @@ function router() {
     }());
   });
   workoutRouter.route('/range')
-  .get(async (req, res) => {
-    const dbWorkouts = await db.Workout.find({});
-    res.json(dbWorkouts);
+  .get((req, res) => {
+    (async function findAllWorkouts() {
+      try {
+        const dbWorkouts = await db.Workout.find({})
+        res.json(dbWorkouts);
+      } catch (err) {
+        res.json(err);
+      }
+    }());
   })
 
   return workoutRouter;

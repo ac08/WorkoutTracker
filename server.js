@@ -22,17 +22,6 @@ app.use(express.json());
 // Sets up the Express app to establish a static directory to access static files
 app.use(express.static(path.join(__dirname, '/public/')));
 
-// Sets up the MongoDB / Mongoose connection
-mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost/workout',
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false
-  }
-);
-
 // Routes
 // =============================================================
 const workoutRouter = require('./routes/api-routes');
@@ -70,8 +59,22 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Starting our Express app
-// =============================================================
-app.listen(PORT, () => {
-  console.log(`listening on PORT ${chalk.green(PORT)}`);
+// Sets up the MongoDB / Mongoose connection
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost/workout',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  }
+);
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error: '));
+db.once('open', () => {
+  // Starting our Express app
+  console.log('Connected to MongoDB');
+  app.listen(PORT, () => {
+    console.log(`listening on PORT ${chalk.green(PORT)}`);
+  });
 });

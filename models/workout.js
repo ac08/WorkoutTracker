@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
+// Create a Mongoose schema
 const Schema = mongoose.Schema;
+// Configure sub-document 'exercise'
 const exercise = {
   type: {
     type: String,
@@ -41,6 +43,10 @@ const WorkoutSchema = new Schema({
 
 });
 
+// Creating a Mongoose model; a Mongoose model is compiled from a Mongoose schema
+// May create as many models against the schema definition as needed
 const Workout = mongoose.model("Workout", WorkoutSchema);
+
+// document is an instance of the model
 
 module.exports = Workout;
