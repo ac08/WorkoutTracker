@@ -1,4 +1,4 @@
-# Fitness Tracker
+# Fullstack Fiit
 
 Node-Express-Mongo application to track individual workouts as specified by the end-user.
 
@@ -16,9 +16,9 @@ You are required to submit the following:
 
 * The URL to the deployed application
 
-https://intense-reaches-57085.herokuapp.com/
+https://andrewcircelli-heroku-fiit.herokuapp.com/
 
 * The URL to the Github repository
 
-https://github.com/ac08/WorkoutTracker
+https://github.com/andrewcircelli/fullStackFiit
 
